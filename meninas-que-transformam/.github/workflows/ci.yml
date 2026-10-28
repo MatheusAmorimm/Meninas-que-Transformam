@@ -29,7 +29,8 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # Node 20 saiu de suporte em abril de 2026; 24 é a LTS atual.
+          node-version: 24
 
       - name: Habilitar Corepack (Yarn 4)
         run: corepack enable

@@ -43,9 +43,14 @@ export function Footer() {
             Projeto oficial da{" "}
             <span className="font-semibold text-ink">PUC-SP</span> em parceria
             com o{" "}
-            <span className="font-semibold text-ink">
+            <a
+              href="https://institutopedrohenrique.org.br/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-lilac-dark underline-offset-4 transition-colors hover:text-ink hover:underline"
+            >
               Instituto Pedro Henrique
-            </span>
+            </a>
             .
           </p>
         </div>

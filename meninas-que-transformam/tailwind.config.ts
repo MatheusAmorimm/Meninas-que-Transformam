@@ -24,6 +24,21 @@ const config: Config = {
       },
       boxShadow: {
         soft: "0 10px 30px -12px rgba(59, 46, 74, 0.25)",
+        lift: "0 20px 40px -16px rgba(59, 46, 74, 0.35)",
+      },
+      keyframes: {
+        "fade-in-up": {
+          "0%": { opacity: "0", transform: "translateY(12px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
+      },
+      animation: {
+        "fade-in-up": "fade-in-up 0.5s ease-out both",
+        float: "float 6s ease-in-out infinite",
       },
     },
   },

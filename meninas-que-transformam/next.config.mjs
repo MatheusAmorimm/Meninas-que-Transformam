@@ -8,20 +8,40 @@
 
 const isDev = process.env.NODE_ENV !== "production";
 
-const contentSecurityPolicy = [
+/**
+ * Em desenvolvimento o Next injeta scripts inline (bootstrap de hidratação),
+ * usa eval para o HMR/React Refresh e abre WebSocket para live-reload. Uma CSP
+ * estrita quebra isso: o HTML do SSR aparece (flash) e logo a hidratação falha,
+ * deixando a tela branca. Por isso usamos uma CSP permissiva em dev e mantemos
+ * a CSP estrita apenas em produção (onde não há scripts inline do framework).
+ */
+const scriptSrc = isDev
+  ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'"
+  : "script-src 'self'";
+
+const connectSrc = isDev
+  ? "connect-src 'self' ws: wss:"
+  : "connect-src 'self'";
+
+const directives = [
   "default-src 'self'",
-  // 'unsafe-inline' é necessário para estilos do Next/Tailwind; em dev o HMR exige 'unsafe-eval'.
-  `script-src 'self'${isDev ? " 'unsafe-eval'" : ""}`,
+  scriptSrc,
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com",
   "img-src 'self' data: blob:",
-  "connect-src 'self'",
+  connectSrc,
   "base-uri 'self'",
   "form-action 'self'",
   "frame-ancestors 'none'",
   "object-src 'none'",
-  "upgrade-insecure-requests",
-].join("; ");
+];
+
+// upgrade-insecure-requests força https; em dev (http://localhost) atrapalha.
+if (!isDev) {
+  directives.push("upgrade-insecure-requests");
+}
+
+const contentSecurityPolicy = directives.join("; ");
 
 const securityHeaders = [
   { key: "Content-Security-Policy", value: contentSecurityPolicy },
@@ -32,16 +52,27 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=(), browsing-topics=()",
   },
-  {
-    key: "Strict-Transport-Security",
-    value: "max-age=63072000; includeSubDomains; preload",
-  },
+  // HSTS só em produção: em http://localhost forçaria https e quebraria o dev.
+  ...(isDev
+    ? []
+    : [
+        {
+          key: "Strict-Transport-Security",
+          value: "max-age=63072000; includeSubDomains; preload",
+        },
+      ]),
 ];
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Comprime as respostas HTML/JS/CSS (gzip) servidas pelo Next.
+  compress: true,
+  experimental: {
+    // Tree-shaking mais agressivo de pacotes com muitos exports.
+    optimizePackageImports: ["next/font"],
+  },
   async headers() {
     return [
       {

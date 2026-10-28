@@ -13,5 +13,6 @@ export const PARTNERS: readonly Partner[] = [
     nome: "Instituto Pedro Henrique",
     descricao:
       "Parceiro do projeto, atua no apoio a iniciativas educacionais e de inclusão, somando esforços para abrir portas na tecnologia.",
+    url: "https://institutopedrohenrique.org.br/",
   },
 ];

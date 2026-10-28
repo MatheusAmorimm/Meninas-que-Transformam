@@ -81,6 +81,8 @@ export interface Partner {
   readonly id: string;
   readonly nome: string;
   readonly descricao: string;
+  /** URL opcional para o site oficial da instituição. */
+  readonly url?: string;
   /** Caminho opcional para o logo (reservado para uso futuro). */
   readonly logo?: string;
 }

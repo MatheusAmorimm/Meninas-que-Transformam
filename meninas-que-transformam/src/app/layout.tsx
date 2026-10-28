@@ -4,17 +4,25 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
+// Fonte de títulos: carregada sob demanda, não bloqueia o primeiro paint.
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
   variable: "--font-poppins",
   display: "swap",
+  preload: false,
+  fallback: ["system-ui", "sans-serif"],
+  adjustFontFallback: true,
 });
 
+// Fonte do corpo: é a crítica para o conteúdo, então fica com preload.
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  preload: true,
+  fallback: ["system-ui", "sans-serif"],
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {

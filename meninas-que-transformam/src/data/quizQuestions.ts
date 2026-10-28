@@ -4,109 +4,119 @@ import type { QuizQuestion } from "@/domain";
  * Banco de perguntas do quiz de perfil de carreira.
  * DEVE conter exatamente 10 perguntas (validado em teste).
  *
- * Cada opção distribui pesos de afinidade entre as carreiras. Os pesos foram
- * calibrados para que cada carreira possa vencer com um conjunto coerente de
- * respostas.
+ * As perguntas são sobre GOSTOS, personalidade e jeito de ser — nada técnico.
+ * A proposta é mostrar que existe espaço na tecnologia para perfis variados:
+ * cada opção distribui, nos bastidores, pesos de afinidade entre as carreiras.
+ * Os pesos foram calibrados para que cada carreira possa vencer com um conjunto
+ * coerente de respostas.
+ *
+ * Correspondência (invisível para quem responde):
+ * - frontend  → gosto pelo visual, estético, por criar coisas bonitas
+ * - ux-design → empatia, pessoas, organizar experiências
+ * - dados     → curiosidade, padrões, investigar o porquê das coisas
+ * - backend   → construir, entender como as coisas funcionam por dentro
+ * - qa        → cuidado, atenção aos detalhes, perfeccionismo
+ * - devops    → organização, processos, deixar tudo funcionando
  */
 export const QUIZ_QUESTIONS: readonly QuizQuestion[] = [
   {
     id: "q1",
-    pergunta: "Em um projeto, o que mais te empolga?",
+    pergunta: "Num dia livre, o que te daria mais prazer?",
     opcoes: [
-      { id: "q1a", texto: "Montar a tela bonita que as pessoas vão usar", pesos: { frontend: 3, "ux-design": 1 } },
-      { id: "q1b", texto: "Fazer a lógica por trás funcionar certinho", pesos: { backend: 3 } },
-      { id: "q1c", texto: "Entender os dados e tirar conclusões", pesos: { dados: 3 } },
-      { id: "q1d", texto: "Garantir que nada quebre para o usuário", pesos: { qa: 3 } },
+      { id: "q1a", texto: "Decorar um cantinho da casa ou montar um look", pesos: { frontend: 3 } },
+      { id: "q1b", texto: "Organizar um encontro e reunir as pessoas", pesos: { "ux-design": 3 } },
+      { id: "q1c", texto: "Mergulhar num documentário ou num quebra-cabeça", pesos: { dados: 2, backend: 1 } },
+      { id: "q1d", texto: "Pôr a casa em ordem e planejar a semana", pesos: { devops: 2, qa: 1 } },
     ],
   },
   {
     id: "q2",
-    pergunta: "Como você prefere resolver um problema?",
+    pergunta: "Qual elogio te deixa mais feliz?",
     opcoes: [
-      { id: "q2a", texto: "Conversando com pessoas para entender a necessidade", pesos: { "ux-design": 3 } },
-      { id: "q2b", texto: "Quebrando em passos lógicos e estruturando", pesos: { backend: 2, qa: 1 } },
-      { id: "q2c", texto: "Olhando números e evidências", pesos: { dados: 3 } },
-      { id: "q2d", texto: "Automatizando para não repetir trabalho", pesos: { devops: 3 } },
+      { id: "q2a", texto: "Você tem um ótimo senso estético", pesos: { frontend: 3 } },
+      { id: "q2b", texto: "Você entende muito bem as pessoas", pesos: { "ux-design": 3 } },
+      { id: "q2c", texto: "Você é super atenta aos detalhes", pesos: { qa: 3 } },
+      { id: "q2d", texto: "Você resolve até os problemas mais difíceis", pesos: { backend: 3 } },
     ],
   },
   {
     id: "q3",
-    pergunta: "Qual atividade você faria com prazer por horas?",
+    pergunta: "Ganhou um dia para aprender algo novo. Você escolhe:",
     opcoes: [
-      { id: "q3a", texto: "Ajustar cores, espaçamentos e animações", pesos: { frontend: 3 } },
-      { id: "q3b", texto: "Desenhar como as telas conversam entre si", pesos: { "ux-design": 3 } },
-      { id: "q3c", texto: "Explorar planilhas e gráficos", pesos: { dados: 3 } },
-      { id: "q3d", texto: "Configurar servidores e ambientes", pesos: { devops: 3 } },
+      { id: "q3a", texto: "Uma oficina de desenho, fotografia ou edição", pesos: { frontend: 3 } },
+      { id: "q3b", texto: "Um curso de comunicação ou psicologia", pesos: { "ux-design": 3 } },
+      { id: "q3c", texto: "Uma aula sobre como investigar e analisar coisas", pesos: { dados: 3 } },
+      { id: "q3d", texto: "Uma oficina de marcenaria ou de montar/consertar", pesos: { backend: 2, devops: 1 } },
     ],
   },
   {
     id: "q4",
-    pergunta: "Um elogio que combina com você:",
+    pergunta: "Numa viagem com amigas, qual papel é o seu?",
     opcoes: [
-      { id: "q4a", texto: "Você é super detalhista e atenta", pesos: { qa: 3 } },
-      { id: "q4b", texto: "Você é criativa e sensível às pessoas", pesos: { "ux-design": 3 } },
-      { id: "q4c", texto: "Você é ótima resolvendo problemas difíceis", pesos: { backend: 3 } },
-      { id: "q4d", texto: "Você é organizada e gosta de processos", pesos: { devops: 2, qa: 1 } },
+      { id: "q4a", texto: "A que planeja o roteiro e os horários", pesos: { devops: 2, qa: 1 } },
+      { id: "q4b", texto: "A que cuida para ninguém ficar de fora", pesos: { "ux-design": 3 } },
+      { id: "q4c", texto: "A que acha os melhores lugares pesquisando bastante", pesos: { dados: 3 } },
+      { id: "q4d", texto: "A que registra tudo em fotos e vídeos bonitos", pesos: { frontend: 3 } },
     ],
   },
   {
     id: "q5",
-    pergunta: "Com qual frase você mais se identifica?",
+    pergunta: "O que mais te incomoda no dia a dia?",
     opcoes: [
-      { id: "q5a", texto: "Amo quando algo fica visualmente lindo", pesos: { frontend: 3 } },
-      { id: "q5b", texto: "Gosto de descobrir padrões escondidos", pesos: { dados: 3 } },
-      { id: "q5c", texto: "Curto construir a base sólida de um sistema", pesos: { backend: 3 } },
-      { id: "q5d", texto: "Fico feliz quando tudo roda sem falhas", pesos: { devops: 2, qa: 1 } },
+      { id: "q5a", texto: "Coisas tortas, desalinhadas ou mal-acabadas", pesos: { frontend: 2, qa: 1 } },
+      { id: "q5b", texto: "Um pequeno erro que passou despercebido", pesos: { qa: 3 } },
+      { id: "q5c", texto: "Processos bagunçados e tarefas repetitivas", pesos: { devops: 3 } },
+      { id: "q5d", texto: "Quando ninguém entende o que o outro precisa", pesos: { "ux-design": 3 } },
     ],
   },
   {
     id: "q6",
-    pergunta: "Em trabalho em grupo, você costuma:",
+    pergunta: "Qual dessas frases mais tem a ver com você?",
     opcoes: [
-      { id: "q6a", texto: "Defender a experiência de quem vai usar", pesos: { "ux-design": 3 } },
-      { id: "q6b", texto: "Revisar tudo para evitar erros", pesos: { qa: 3 } },
-      { id: "q6c", texto: "Cuidar da parte técnica mais complexa", pesos: { backend: 2, devops: 1 } },
-      { id: "q6d", texto: "Trazer dados para apoiar as decisões", pesos: { dados: 3 } },
+      { id: "q6a", texto: "Amo quando as coisas ficam bonitas e harmônicas", pesos: { frontend: 3 } },
+      { id: "q6b", texto: "Adoro descobrir o porquê escondido das coisas", pesos: { dados: 3 } },
+      { id: "q6c", texto: "Gosto de construir algo do zero com minhas mãos", pesos: { backend: 3 } },
+      { id: "q6d", texto: "Fico satisfeita quando tudo funciona sem imprevistos", pesos: { devops: 2, qa: 1 } },
     ],
   },
   {
     id: "q7",
-    pergunta: "O que mais te atrai em tecnologia?",
+    pergunta: "Você se considera uma pessoa mais:",
     opcoes: [
-      { id: "q7a", texto: "Criar coisas que as pessoas veem e tocam", pesos: { frontend: 3 } },
-      { id: "q7b", texto: "Automatizar e escalar sistemas", pesos: { devops: 3 } },
-      { id: "q7c", texto: "Usar IA e dados para prever cenários", pesos: { dados: 3 } },
-      { id: "q7d", texto: "Entender profundamente como tudo funciona", pesos: { backend: 3 } },
+      { id: "q7a", texto: "Criativa e cheia de ideias", pesos: { frontend: 2, "ux-design": 1 } },
+      { id: "q7b", texto: "Curiosa e questionadora", pesos: { dados: 3 } },
+      { id: "q7c", texto: "Lógica e boa em montar o raciocínio passo a passo", pesos: { backend: 3 } },
+      { id: "q7d", texto: "Metódica e organizada", pesos: { devops: 2, qa: 1 } },
     ],
   },
   {
     id: "q8",
-    pergunta: "Qual desafio parece mais divertido?",
+    pergunta: "Qual jogo ou passatempo mais te atrai?",
     opcoes: [
-      { id: "q8a", texto: "Deixar um site rápido e acessível para todos", pesos: { frontend: 2, "ux-design": 1 } },
-      { id: "q8b", texto: "Encontrar o bug que ninguém achou", pesos: { qa: 3 } },
-      { id: "q8c", texto: "Modelar um banco de dados eficiente", pesos: { backend: 3 } },
-      { id: "q8d", texto: "Construir um painel que conta uma história", pesos: { dados: 2, "ux-design": 1 } },
+      { id: "q8a", texto: "Jogos de montar, LEGO ou estratégia", pesos: { backend: 3 } },
+      { id: "q8b", texto: "Jogo dos 7 erros ou caça-palavras", pesos: { qa: 3 } },
+      { id: "q8c", texto: "Pintura, colagem ou algo bem visual", pesos: { frontend: 3 } },
+      { id: "q8d", texto: "Enigmas e mistérios para desvendar", pesos: { dados: 3 } },
     ],
   },
   {
     id: "q9",
-    pergunta: "Como você gosta de aprender algo novo?",
+    pergunta: "Trabalhando em grupo, você naturalmente:",
     opcoes: [
-      { id: "q9a", texto: "Testando e prototipando ideias rápido", pesos: { "ux-design": 2, frontend: 1 } },
-      { id: "q9b", texto: "Lendo a documentação a fundo", pesos: { backend: 3 } },
-      { id: "q9c", texto: "Experimentando até quebrar e consertar", pesos: { devops: 3 } },
-      { id: "q9d", texto: "Comparando resultados e medindo", pesos: { dados: 2, qa: 1 } },
+      { id: "q9a", texto: "Cuida para que todo mundo seja ouvido", pesos: { "ux-design": 3 } },
+      { id: "q9b", texto: "Revisa tudo no final para nada sair errado", pesos: { qa: 3 } },
+      { id: "q9c", texto: "Organiza quem faz o quê e quando", pesos: { devops: 3 } },
+      { id: "q9d", texto: "Traz fatos e pesquisas para a conversa", pesos: { dados: 3 } },
     ],
   },
   {
     id: "q10",
-    pergunta: "Daqui a alguns anos, você gostaria de:",
+    pergunta: "O que faria você sentir orgulho do seu trabalho?",
     opcoes: [
-      { id: "q10a", texto: "Liderar o design de produtos incríveis", pesos: { "ux-design": 3 } },
-      { id: "q10b", texto: "Ser referência técnica em desenvolvimento", pesos: { backend: 2, frontend: 1 } },
-      { id: "q10c", texto: "Trabalhar com inteligência artificial e dados", pesos: { dados: 3 } },
-      { id: "q10d", texto: "Cuidar da infraestrutura e da segurança", pesos: { devops: 2, qa: 1 } },
+      { id: "q10a", texto: "Criar algo lindo que as pessoas adorem usar", pesos: { frontend: 2, "ux-design": 1 } },
+      { id: "q10b", texto: "Entender pessoas e facilitar a vida delas", pesos: { "ux-design": 3 } },
+      { id: "q10c", texto: "Encontrar uma resposta que ninguém tinha percebido", pesos: { dados: 3 } },
+      { id: "q10d", texto: "Construir uma base sólida que sustenta tudo", pesos: { backend: 2, devops: 1 } },
     ],
   },
 ];

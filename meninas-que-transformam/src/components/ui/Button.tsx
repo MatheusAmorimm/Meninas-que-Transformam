@@ -4,11 +4,13 @@ import type { ComponentPropsWithoutRef, ReactNode } from "react";
 type Variant = "primary" | "secondary";
 
 const base =
-  "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition-colors focus-visible:outline-none";
+  "group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 ease-out focus-visible:outline-none hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97] motion-reduce:transform-none motion-reduce:transition-colors";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-lilac text-white hover:bg-lilac-dark",
-  secondary: "border border-lilac text-ink hover:bg-lilac-light",
+  primary:
+    "bg-lilac text-white shadow-soft hover:bg-lilac-dark hover:shadow-lift",
+  secondary:
+    "border border-lilac text-ink hover:bg-lilac-light hover:shadow-soft",
 };
 
 interface LinkButtonProps {

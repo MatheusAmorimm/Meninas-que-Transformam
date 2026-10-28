@@ -48,8 +48,16 @@ export default function SobrePage() {
           <p className="mt-3 max-w-3xl text-ink/80">
             O projeto é uma realização da{" "}
             <strong>PUC-SP</strong> em parceria com o{" "}
-            <strong>Instituto Pedro Henrique</strong>, unindo educação e impacto
-            social para apoiar mais mulheres na tecnologia.
+            <a
+              href="https://institutopedrohenrique.org.br/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-lilac-dark underline-offset-4 transition-colors hover:text-ink hover:underline"
+            >
+              Instituto Pedro Henrique
+            </a>
+            , unindo educação e impacto social para apoiar mais mulheres na
+            tecnologia.
           </p>
           <div className="mt-6">
             <LinkButton href="/parceiros" variant="secondary">

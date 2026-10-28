@@ -14,7 +14,6 @@ const requisitosComuns = [
   "Lógica de programação e vontade de aprender",
   "Conhecimento de pelo menos uma linguagem ou ferramenta da área",
   "Trabalho em equipe e boa comunicação",
-  "Inglês técnico para ler documentação (mesmo que básico)",
   "Portfólio ou projetos pessoais, mesmo que simples",
 ];
 

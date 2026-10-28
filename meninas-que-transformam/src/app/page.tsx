@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { LinkButton } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 
@@ -29,7 +30,7 @@ export default function HomePage() {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="container-page grid items-center gap-10 py-16 md:grid-cols-2 md:py-24">
-          <div>
+          <div className="motion-safe:animate-fade-in-up">
             <span className="inline-block rounded-full bg-lilac-light px-4 py-1 text-sm font-semibold text-lilac-dark">
               PUC-SP + Instituto Pedro Henrique
             </span>
@@ -50,12 +51,15 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div
-            aria-hidden="true"
-            className="relative mx-auto aspect-square w-full max-w-sm"
-          >
-            <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-lilac via-blush to-lilac-light opacity-80 blur-sm" />
-            <div className="absolute inset-6 rounded-[2rem] bg-white/60 backdrop-blur" />
+          <div className="relative mx-auto aspect-square w-full max-w-md motion-safe:animate-float">
+            <Image
+              src="/logo.png"
+              alt="Logo do projeto Meninas que Transformam"
+              width={512}
+              height={512}
+              priority
+              className="h-full w-full object-contain"
+            />
           </div>
         </div>
       </section>
@@ -64,16 +68,26 @@ export default function HomePage() {
       <section className="container-page py-8 md:py-12">
         <h2 className="text-2xl font-bold">Por onde começar</h2>
         <div className="mt-6 grid gap-6 md:grid-cols-3">
-          {atalhos.map((item) => (
-            <Card key={item.href} as="article" className="flex flex-col">
+          {atalhos.map((item, index) => (
+            <Card
+              key={item.href}
+              as="article"
+              className="flex flex-col motion-safe:animate-fade-in-up"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
               <h3 className="text-xl font-semibold">{item.titulo}</h3>
               <p className="mt-2 flex-1 text-ink/80">{item.texto}</p>
               <Link
                 href={item.href}
-                className="mt-4 inline-flex items-center gap-1 font-semibold text-lilac-dark underline-offset-4 hover:underline"
+                className="group mt-4 inline-flex items-center gap-1 font-semibold text-lilac-dark underline-offset-4 hover:underline"
               >
                 Acessar
-                <span aria-hidden="true">→</span>
+                <span
+                  aria-hidden="true"
+                  className="transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transform-none"
+                >
+                  →
+                </span>
               </Link>
             </Card>
           ))}

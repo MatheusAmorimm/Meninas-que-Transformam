@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -22,12 +23,16 @@ export function Navbar() {
       >
         <Link
           href="/"
-          className="flex items-center gap-2 font-heading text-lg font-bold text-ink"
+          className="flex items-center gap-2 font-heading text-lg font-bold text-ink transition-transform hover:scale-[1.03] motion-reduce:transform-none"
           onClick={() => setOpen(false)}
         >
-          <span
-            aria-hidden="true"
-            className="inline-block h-7 w-7 rounded-full bg-gradient-to-br from-lilac to-blush"
+          <Image
+            src="/favicon.png"
+            alt=""
+            width={96}
+            height={96}
+            priority
+            className="h-10 w-10"
           />
           Meninas que Transformam
         </Link>

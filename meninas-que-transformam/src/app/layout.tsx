@@ -40,7 +40,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${poppins.variable} ${inter.variable}`}>
+    // data-scroll-behavior: mantém a rolagem suave do globals.css só para
+    // âncoras; nas trocas de página o Next volta ao topo sem animação.
+    <html
+      lang="pt-BR"
+      data-scroll-behavior="smooth"
+      className={`${poppins.variable} ${inter.variable}`}
+    >
       <body className="flex min-h-screen flex-col">
         <a href="#conteudo" className="skip-link">
           Pular para o conteúdo

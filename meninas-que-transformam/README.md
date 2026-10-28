@@ -86,7 +86,8 @@ A dependência flui de fora para dentro: `app` → `components` → `lib`/`data`
 
 ## CI/CD
 
-O workflow `.github/workflows/ci.yml` roda em cada push/PR para `main`:
+O workflow `.github/workflows/ci.yml`, na **raiz do repositório** (o GitHub
+Actions só lê workflows de lá), roda em cada push/PR para `main`:
 `yarn install --immutable` → `lint` → `typecheck` → `test` → `build`.
 
 ## Deploy na Vercel

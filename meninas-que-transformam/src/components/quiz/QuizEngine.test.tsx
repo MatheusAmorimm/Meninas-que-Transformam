@@ -29,6 +29,10 @@ describe("QuizEngine", () => {
     expect(
       screen.getByText("A carreira que mais combina com você é"),
     ).toBeInTheDocument();
+    // As primeiras opções pontuam várias carreiras, então há afins a sugerir.
+    expect(
+      screen.getByRole("region", { name: "Também combina com você" }),
+    ).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: "Refazer quiz" }),
     ).toBeInTheDocument();

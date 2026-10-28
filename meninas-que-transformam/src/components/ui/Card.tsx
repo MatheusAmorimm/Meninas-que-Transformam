@@ -4,6 +4,8 @@ interface CardProps {
   children: ReactNode;
   className?: string;
   as?: "div" | "article" | "li";
+  /** Permite usar o card como âncora (ex.: /carreiras#seguranca). */
+  id?: string;
   style?: CSSProperties;
   /** Ativa a animação de "lift" ao passar o mouse. Padrão: true. */
   interactive?: boolean;
@@ -17,12 +19,14 @@ export function Card({
   children,
   className = "",
   as = "div",
+  id,
   style,
   interactive = true,
 }: CardProps) {
   const Component = as;
   return (
     <Component
+      id={id}
       style={style}
       className={`rounded-2xl border border-lilac-light bg-white/70 p-6 shadow-soft ${
         interactive ? interactiveClasses : ""

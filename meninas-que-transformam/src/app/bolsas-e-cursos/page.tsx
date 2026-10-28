@@ -7,7 +7,7 @@ import { SCHOLARSHIPS } from "@/data/scholarships";
 export const metadata: Metadata = {
   title: "Bolsas e Cursos",
   description:
-    "Cursos gratuitos (Fundação Bradesco, Curso em Vídeo, Senac), bolsas de estudo e o que as vagas de tecnologia costumam pedir.",
+    "Cursos gratuitos (Fundação Bradesco, Curso em Vídeo, Senac, Cisco, Microsoft Learn e outros), bolsas de estudo e o que as vagas de tecnologia costumam pedir.",
 };
 
 const requisitosComuns = [

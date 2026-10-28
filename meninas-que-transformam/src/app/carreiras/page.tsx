@@ -7,8 +7,11 @@ import { CAREERS } from "@/data/careers";
 export const metadata: Metadata = {
   title: "Carreiras em Tech",
   description:
-    "Conheça carreiras em tecnologia como Front-end, Back-end, Dados, UX/Design, QA e DevOps, com as habilidades que cada área pede.",
+    "Conheça carreiras em tecnologia, de Front-end e Back-end a Ciência e Engenharia de Dados, Segurança, Produto e Suporte de TI, com as habilidades que cada área pede e como elas aparecem nas vagas.",
 };
+
+const subtitleClasses =
+  "mt-4 text-sm font-semibold uppercase tracking-wide text-lilac-dark";
 
 export default function CarreirasPage() {
   return (
@@ -21,13 +24,18 @@ export default function CarreirasPage() {
       <section className="container-page py-12">
         <ul className="grid gap-6 md:grid-cols-2">
           {CAREERS.map((career) => (
-            <Card as="li" key={career.id} className="flex flex-col">
+            // id: âncora usada pelos links "Também combina com você" do quiz;
+            // scroll-mt compensa a altura do cabeçalho fixo.
+            <Card
+              as="li"
+              key={career.id}
+              id={career.id}
+              className="flex scroll-mt-24 flex-col"
+            >
               <h2 className="text-xl font-semibold">{career.nome}</h2>
               <p className="mt-2 text-ink/80">{career.descricao}</p>
 
-              <h3 className="mt-4 text-sm font-semibold uppercase tracking-wide text-lilac-dark">
-                Habilidades-chave
-              </h3>
+              <h3 className={subtitleClasses}>Habilidades-chave</h3>
               <ul className="mt-2 flex flex-wrap gap-2">
                 {career.habilidades.map((skill) => (
                   <li
@@ -35,6 +43,18 @@ export default function CarreirasPage() {
                     className="rounded-full bg-lilac-light px-3 py-1 text-sm text-ink"
                   >
                     {skill}
+                  </li>
+                ))}
+              </ul>
+
+              <h3 className={subtitleClasses}>Como aparece nas vagas</h3>
+              <ul className="mt-2 flex flex-wrap gap-2">
+                {career.cargos.map((cargo) => (
+                  <li
+                    key={cargo}
+                    className="rounded-full border border-lilac px-3 py-1 text-sm text-ink"
+                  >
+                    {cargo}
                   </li>
                 ))}
               </ul>

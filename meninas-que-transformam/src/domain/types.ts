@@ -10,19 +10,29 @@
 export type CareerId =
   | "frontend"
   | "backend"
-  | "dados"
+  | "analise-dados"
+  | "ciencia-dados"
+  | "engenharia-dados"
   | "ux-design"
+  | "produto"
   | "qa"
-  | "devops";
+  | "devops"
+  | "seguranca"
+  | "suporte";
 
 /** Lista canônica e ordenada de carreiras — usada para desempate determinístico. */
 export const CAREER_IDS: readonly CareerId[] = [
   "frontend",
   "backend",
-  "dados",
+  "analise-dados",
+  "ciencia-dados",
+  "engenharia-dados",
   "ux-design",
+  "produto",
   "qa",
   "devops",
+  "seguranca",
+  "suporte",
 ] as const;
 
 /** Uma carreira em tecnologia apresentada no site. */
@@ -32,6 +42,12 @@ export interface Career {
   readonly resumo: string;
   readonly descricao: string;
   readonly habilidades: readonly string[];
+  /**
+   * Como a carreira aparece nos anúncios de vagas (cargos em português e, entre
+   * parênteses, o nome em inglês usado por muitas empresas). Ajuda a buscar
+   * vagas nos sites de emprego.
+   */
+  readonly cargos: readonly string[];
   /** IDs de cursos relacionados (referência para a camada de dados de cursos). */
   readonly cursosRelacionados: readonly string[];
 }
@@ -57,6 +73,8 @@ export interface QuizQuestion {
 export interface QuizResult {
   readonly careerId: CareerId;
   readonly pontuacao: Record<CareerId, number>;
+  /** Até 2 carreiras que vêm logo depois da vencedora (só as que pontuaram). */
+  readonly afins: readonly CareerId[];
 }
 
 /** Um curso gratuito indicado pelo site. */

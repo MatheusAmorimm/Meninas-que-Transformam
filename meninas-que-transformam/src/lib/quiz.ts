@@ -44,24 +44,24 @@ export function scoreAnswers(
   return score;
 }
 
+/** Quantas carreiras afins o resultado sugere além da vencedora. */
+const MAX_AFINS = 2;
+
 /**
- * Escolhe a carreira vencedora a partir de um placar.
+ * Ordena todas as carreiras da maior para a menor pontuação.
  *
- * Desempate determinístico: em caso de empate na pontuação, vence a carreira
- * que aparece primeiro em {@link CAREER_IDS}, garantindo resultado reproduzível.
+ * Desempate determinístico: em caso de empate na pontuação, vem primeiro a
+ * carreira que aparece antes em {@link CAREER_IDS}, garantindo resultado
+ * reproduzível.
  */
+export function rankCareers(score: Record<CareerId, number>): CareerId[] {
+  // sort é estável: empates mantêm a ordem canônica de CAREER_IDS.
+  return [...CAREER_IDS].sort((a, b) => score[b] - score[a]);
+}
+
+/** Escolhe a carreira vencedora: a primeira de {@link rankCareers}. */
 export function pickWinner(score: Record<CareerId, number>): CareerId {
-  let winner: CareerId = CAREER_IDS[0];
-  let best = -Infinity;
-
-  for (const careerId of CAREER_IDS) {
-    if (score[careerId] > best) {
-      best = score[careerId];
-      winner = careerId;
-    }
-  }
-
-  return winner;
+  return rankCareers(score)[0];
 }
 
 /**
@@ -87,7 +87,10 @@ export function resolveQuiz(
   });
 
   const pontuacao = scoreAnswers(selectedOptions);
-  const careerId = pickWinner(pontuacao);
+  const [careerId, ...demais] = rankCareers(pontuacao);
+  const afins = demais
+    .filter((id) => pontuacao[id] > 0)
+    .slice(0, MAX_AFINS);
 
-  return { careerId, pontuacao };
+  return { careerId, pontuacao, afins };
 }

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { ResultCard } from "./ResultCard";
 import { QUIZ_QUESTIONS } from "@/data/quizQuestions";
 import { resolveQuiz } from "@/lib/quiz";
-import type { CareerId } from "@/domain";
+import type { QuizResult } from "@/domain";
 
 /**
  * Componente interativo do quiz. Roda inteiramente no navegador e não persiste
@@ -20,7 +20,7 @@ export function QuizEngine() {
   const [answers, setAnswers] = useState<(string | undefined)[]>(
     () => Array.from({ length: total }, () => undefined),
   );
-  const [result, setResult] = useState<CareerId | null>(null);
+  const [result, setResult] = useState<QuizResult | null>(null);
 
   const question = questions[current];
   const selectedId = answers[current];
@@ -43,8 +43,7 @@ export function QuizEngine() {
   function goNext() {
     if (!canAdvance) return;
     if (isLast) {
-      const { careerId } = resolveQuiz(questions, answers);
-      setResult(careerId);
+      setResult(resolveQuiz(questions, answers));
       return;
     }
     setCurrent((c) => Math.min(c + 1, total - 1));
@@ -61,7 +60,13 @@ export function QuizEngine() {
   }
 
   if (result) {
-    return <ResultCard careerId={result} onRestart={restart} />;
+    return (
+      <ResultCard
+        careerId={result.careerId}
+        afins={result.afins}
+        onRestart={restart}
+      />
+    );
   }
 
   return (
